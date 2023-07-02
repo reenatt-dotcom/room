@@ -1,0 +1,201 @@
+<!-- lounge.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>Online Clue Game - Lounge</title>
+  <style>
+    /* CSS styles for the page */
+    html, body {
+        height: 100%;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+
+      background-image: url('./images/lounge.gif');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      font-weight: 600;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow effect */
+      color: white;
+    }
+    
+    nav {
+      background-color: #333;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    li {
+      margin: 0 10px;
+    }
+
+    li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      transition: background-color 0.3s;
+    }
+
+    li a:hover {
+      background-color: #555;
+    }
+
+    h1, p {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .dice-container {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .dice {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .dice-square {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      background-color: #fff;
+      border: 1px solid #000;
+      border-radius: 5px;
+      margin: 5px;
+      font-size: 24px;
+      line-height: 60px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .dice-button {
+      font-size: 18px;
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="kitchen.html">Enter Kitchen</a></li>
+      <li><a href="ballroom.html">Enter Ballroom</a></li>
+      <li><a href="conservatory.html">Enter Conservatory</a></li>
+      <li><a href="dining-room.html">Enter Dining Room</a></li>
+      <li><a href="billiard-room.html">Enter Billiard Room</a></li>
+      <li><a href="library.html">Enter Library</a></li>
+      <li><a href="study.html">Enter Study</a></li>
+      <li><a href="hall.html">Enter Hall</a></li>
+      <li><a href="lounge.html">Enter Lounge</a></li>
+      <li><a href="cellar.html">Enter Cellar</a></li>
+    </ul>
+  </nav>
+
+  <h1>Lounge</h1>
+  <p>Welcome to the luxurious lounge! This room is designed for relaxation and comfort, offering a cozy atmosphere for guests to unwind. The lounge is filled with plush sofas, elegant armchairs, and soft lighting that creates a tranquil ambiance.</p>
+  <p>The walls of the lounge are adorned with beautiful artwork and shelves lined with books. A grand fireplace provides warmth during colder nights, adding to the inviting atmosphere. Guests can enjoy a cup of tea or engage in engaging conversations while taking in the serene views from the large windows.</p>
+  <p>The lounge is the perfect place to take a break from the mysteries that surround the mansion. Sit back, relax, and gather your thoughts before continuing your investigation into the secrets hidden within these walls.</p>
+
+  <div class="dice-container">
+    <div class="dice">
+      <div class="dice-square" id="dice1">1</div>
+      <div class="dice-square" id="dice2">1</div>
+    </div>
+    <button class="dice-button" id="roll-button">Roll Dice</button>
+  </div>
+
+  <div class="attribution">
+    Created by <a href="#">Reena</a>.
+  </div>
+
+  <script>
+    // JavaScript to handle dice rolling
+    const dice1 = document.getElementById('dice1');
+    const dice2 = document.getElementById('dice2');
+    const rollButton = document.getElementById('roll-button');
+
+    // Dice rolling event listener
+    rollButton.addEventListener('click', () => {
+      const diceValue1 = Math.floor(Math.random() * 6) + 1;
+      const diceValue2 = Math.floor(Math.random() * 6) + 1;
+      dice1.textContent = diceValue1;
+      dice2.textContent = diceValue2;
+
+      // Calculate the sum of the dice values
+      const diceSum = diceValue1 + diceValue2;
+
+      // Determine the room based on the dice sum
+      let room = '';
+      switch (diceSum) {
+        case 2:
+          room = 'ballroom.html';
+          break;
+        case 3:
+          room = 'conservatory.html';
+          break;
+        case 4:
+          room = 'dining-room.html';
+          break;
+        case 5:
+          room = 'billiard-room.html';
+          break;
+        case 6:
+          room = 'library.html';
+          break;
+        case 7:
+          room = 'study.html';
+          break;
+        case 8:
+          room = 'hall.html';
+          break;
+        case 9:
+          room = 'lounge.html';
+          break;
+        case 10:
+          room = 'cellar.html';
+          break;
+        case 11:
+          room = 'kitchen.html';
+          break;
+      }
+
+      // Redirect to the corresponding room
+      if (room) {
+        window.location.href = room;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -16,12 +16,13 @@
       margin: 0;
       padding: 0;
 
-      background-image: url('./images/ballroom.webp');
+      background-image: url('./images/ballroom.gif');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       font-family: Arial, sans-serif;
-      
+      font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow effect */
       color: white;
       
     }
@@ -56,28 +57,6 @@
     h1, p {
       text-align: center;
       margin: 20px;
-    }
-
-    .card-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 20px;
-    }
-
-    .card {
-      width: 100px;
-      height: 150px;
-      background-color: #f5f5f5;
-      background-image: url('./images/card-back.jpg');
-      background-size: cover;
-      background-position: center;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      margin: 10px;
-      padding: 10px;
-      text-align: center;
-      cursor: pointer;
     }
 
     .dice-container {
@@ -150,12 +129,6 @@
   <p>The ballroom's expansive size allows for graceful movements and enchanting waltzes. The walls are lined with tall mirrors, reflecting the beauty of the room from every angle. A magnificent stage is set at one end, often used for live performances or musical accompaniment to the dances.</p>
   <p>The atmosphere in the ballroom is always electric during social events and formal affairs. It has hosted glamorous masquerade balls, prestigious charity galas, and important celebrations throughout history. The ballroom's timeless charm and allure make it a favorite gathering place for socialites and distinguished guests.</p>
 
-  <div class="card-container">
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-  </div>
-
   <div class="dice-container">
     <div class="dice">
       <div class="dice-square" id="dice1">1</div>
@@ -165,7 +138,7 @@
   </div>
 
   <div class="attribution">
-    Created by <a href="#">Your Name Here</a>.
+    Created by <a href="#">Reena</a>.
   </div>
 
   <script>
