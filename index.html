@@ -65,6 +65,40 @@
       object-fit: cover;
     }
 
+    .character-message {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .cards {
+      text-align: center;
+    }
+
+    .card-container {
+      display: inline-block;
+      width: 80px;
+      height: 120px;
+      border: 1px solid #000;
+      background-color: #ccc;
+      margin: 10px;
+      position: relative;
+    }
+
+    .card-number {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .shuffle-button {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+
     .attribution {
       font-size: 11px;
       text-align: center;
@@ -123,76 +157,73 @@
     </label>
   </div>
 
+  <div class="character-message"></div>
+
+  <div class="cards">
+    <h2>Shuffled Cards</h2>
+    <div class="card-container"></div>
+    <div class="shuffle-button">
+      <button onclick="shuffleCards()">Shuffle</button>
+    </div>
+  </div>
+
   <div class="attribution">
     Created by <a href="#">Your Name Here</a>.
   </div>
 
   <script>
-    // JavaScript to handle character selection
+    // JavaScript to handle character selection and card shuffling
     const characterSelection = document.querySelector('.character-selection');
     const characterInputs = characterSelection.querySelectorAll('input[type="radio"]');
-    const characterFullName = {
-      scarlet: "Miss Scarlet",
-      mustard: "Colonel Mustard",
-      white: "Mrs. White",
-      green: "Mr. Green",
-      peacock: "Mrs. Peacock",
-      plum: "Professor Plum"
-    };
-  
+    const characterMessage = document.querySelector('.character-message');
+    const cardContainer = document.querySelector('.card-container');
+
     let selectedCharacter = '';
-  
+
     // Event listener for character selection
     characterInputs.forEach(input => {
       input.addEventListener('change', () => {
         selectedCharacter = input.value;
-        becomeCharacter(selectedCharacter);
+        characterMessage.textContent = `You have chosen: ${getCharacterFullName(selectedCharacter)}`;
       });
     });
-  
-    // Event listener for navigation links
-    const navLinks = document.querySelectorAll('nav a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', (event) => {
-        // Prevent navigation if a character is not selected
-        if (!selectedCharacter) {
-          event.preventDefault();
-          alert('Please select a character first.');
-        }
+
+    // Function to get character's full name
+    function getCharacterFullName(character) {
+      switch (character) {
+        case 'scarlet':
+          return 'Miss Scarlet';
+        case 'mustard':
+          return 'Colonel Mustard';
+        case 'white':
+          return 'Mrs. White';
+        case 'green':
+          return 'Mr. Green';
+        case 'peacock':
+          return 'Mrs. Peacock';
+        case 'plum':
+          return 'Professor Plum';
+        default:
+          return '';
+      }
+    }
+
+    // Function to shuffle cards
+    function shuffleCards() {
+      cardContainer.innerHTML = '';
+      const numbers = [1, 2, 3, 4, 5, 6];
+      numbers.sort(() => Math.random() - 0.5);
+      numbers.forEach(number => {
+        const card = document.createElement('div');
+        card.classList.add('card-container');
+        card.innerHTML = `
+          <div class="card-container">
+            <div class="card-number">${number}</div>
+          </div>
+        `;
+        cardContainer.appendChild(card);
       });
-    });
-  
-    function becomeCharacter(character) {
-      // Remove previously selected character
-      const previousCharacterMessage = characterSelection.querySelector('.character-message');
-      if (previousCharacterMessage) {
-        previousCharacterMessage.remove();
-      }
-  
-      // Add the selected character as a class to the body
-      document.body.classList.add(character);
-  
-      // Display the chosen character's full name
-      const characterMessage = document.createElement('p');
-      characterMessage.textContent = 'You have chosen: ' + characterFullName[character];
-      characterMessage.classList.add('character-message');
-      characterSelection.appendChild(characterMessage);
     }
-  
-    // JavaScript for card shuffling
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-  
-    const cards = ['Colonel Mustard', 'Miss Scarlet', 'Professor Plum', 'Mrs. White', 'Mr. Green', 'Mrs. Peacock'];
-    const shuffledCards = shuffleArray(cards);
-  
-    console.log('Shuffled Cards:', shuffledCards);
   </script>
-  
 </body>
 </html>
