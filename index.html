@@ -1,59 +1,198 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Room homepage</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <title>Online Clue Game</title>
   <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
+    /* CSS styles for the homepage */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    nav {
+      background-color: #333;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    li {
+      margin: 0 10px;
+    }
+
+    li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      transition: background-color 0.3s;
+    }
+
+    li a:hover {
+      background-color: #555;
+    }
+
+    h1, p {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .character-selection {
+      text-align: center;
+      margin: 50px;
+    }
+
+    .character-selection label {
+      display: inline-block;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    .character-image {
+      display: block;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
-  Home
-  Shop
-  About
-  Contact
+  <nav>
+    <ul>
+      <li><a href="kitchen.html">Enter Kitchen</a></li>
+      <li><a href="ballroom.html">Enter Ballroom</a></li>
+      <li><a href="conservatory.html">Enter Conservatory</a></li>
+      <li><a href="dining-room.html">Enter Dining Room</a></li>
+      <li><a href="billiard-room.html">Enter Billiard Room</a></li>
+      <li><a href="library.html">Enter Library</a></li>
+      <li><a href="study.html">Enter Study</a></li>
+      <li><a href="hall.html">Enter Hall</a></li>
+      <li><a href="lounge.html">Enter Lounge</a></li>
+      <li><a href="cellar.html">Enter Cellar</a></li>
+    </ul>
+  </nav>
 
-  Discover innovative ways to decorate
+  <h1>Welcome to the Online Clue Game</h1>
+  <p>Choose a character:</p>
 
-  We provide unmatched quality, comfort, and style for property owners across the country. 
-  Our experts combine form and function in bringing your vision to life. Create a room in your 
-  own style with our collection and make your property a reflection of you and what you love.
-
-  Shop now
-
-  We are available all across the globe
-
-  With stores all over the world, it's easy for you to find furniture for your home or place of business. 
-  Locally, we’re in most major cities throughout the country. Find the branch nearest you using our 
-  store locator. Any questions? Don't hesitate to contact us today.
-
-  Shop now
-
-  Manufactured with the best materials
-
-  Our modern furniture store provide a high level of quality. Our company has invested in advanced technology 
-  to ensure that every product is made as perfect and as consistent as possible. With three decades of 
-  experience in this industry, we understand what customers want for their home and office.
-
-  Shop now
-
-  About our furniture
-
-  Our multifunctional collection blends design and function to suit your individual taste.
-  Make each room unique, or pick a cohesive theme that best express your interests and what
-  inspires you. Find the furniture pieces you need, from traditional to contemporary styles
-  or anything in between. Product specialists are available to help you create your dream space.
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+  <div class="character-selection">
+    <label>
+      <input type="radio" name="character" value="scarlet">
+      <img src="./images/scarlet.jpg" alt="Miss Scarlet" class="character-image">
+    </label>
+    <label>
+      <input type="radio" name="character" value="mustard">
+      <img src="./images/mustard.jpg" alt="Colonel Mustard" class="character-image">
+    </label>
+    <label>
+      <input type="radio" name="character" value="white">
+      <img src="./images/white.jpg" alt="Mrs. White" class="character-image">
+    </label>
+    <label>
+      <input type="radio" name="character" value="green">
+      <img src="./images/green.jpg" alt="Mr. Green" class="character-image">
+    </label>
+    <label>
+      <input type="radio" name="character" value="peacock">
+      <img src="./images/peacock.jpg" alt="Mrs. Peacock" class="character-image">
+    </label>
+    <label>
+      <input type="radio" name="character" value="plum">
+      <img src="./images/plum.jpg" alt="Professor Plum" class="character-image">
+    </label>
   </div>
+
+  <div class="attribution">
+    Created by <a href="#">Your Name Here</a>.
+  </div>
+
+  <script>
+    // JavaScript to handle character selection
+    const characterSelection = document.querySelector('.character-selection');
+    const characterInputs = characterSelection.querySelectorAll('input[type="radio"]');
+    const characterFullName = {
+      scarlet: "Miss Scarlet",
+      mustard: "Colonel Mustard",
+      white: "Mrs. White",
+      green: "Mr. Green",
+      peacock: "Mrs. Peacock",
+      plum: "Professor Plum"
+    };
+  
+    let selectedCharacter = '';
+  
+    // Event listener for character selection
+    characterInputs.forEach(input => {
+      input.addEventListener('change', () => {
+        selectedCharacter = input.value;
+        becomeCharacter(selectedCharacter);
+      });
+    });
+  
+    // Event listener for navigation links
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+        // Prevent navigation if a character is not selected
+        if (!selectedCharacter) {
+          event.preventDefault();
+          alert('Please select a character first.');
+        }
+      });
+    });
+  
+    function becomeCharacter(character) {
+      // Remove previously selected character
+      const previousCharacterMessage = characterSelection.querySelector('.character-message');
+      if (previousCharacterMessage) {
+        previousCharacterMessage.remove();
+      }
+  
+      // Add the selected character as a class to the body
+      document.body.classList.add(character);
+  
+      // Display the chosen character's full name
+      const characterMessage = document.createElement('p');
+      characterMessage.textContent = 'You have chosen: ' + characterFullName[character];
+      characterMessage.classList.add('character-message');
+      characterSelection.appendChild(characterMessage);
+    }
+  
+    // JavaScript for card shuffling
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+  
+    const cards = ['Colonel Mustard', 'Miss Scarlet', 'Professor Plum', 'Mrs. White', 'Mr. Green', 'Mrs. Peacock'];
+    const shuffledCards = shuffleArray(cards);
+  
+    console.log('Shuffled Cards:', shuffledCards);
+  </script>
+  
 </body>
 </html>
