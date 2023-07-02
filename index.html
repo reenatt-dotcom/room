@@ -21,7 +21,7 @@
       background-position: center;
       color: white;
       font-weight: 600;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow effect */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow effect */
     }
     
     nav {
@@ -127,11 +127,16 @@
       margin-top: 20px;
       font-weight: bold;
     }
+
+    .center {
+    text-align: center;
+    margin-top: 20px;
+  }
     
   </style>
 </head>
 <body>
-  <audio src="whenyouwishuponastar.mp3" autoplay loop></audio> 
+  <audio src="whenyouwishuponastar.mp3" loop></audio>
 
   <nav>
     <ul>
@@ -188,12 +193,16 @@
     <button class="dice-button" id="roll-button">Roll Dice</button>
   </div>
 
+  <div class="center">
+    <button id="start-button">Start Audio</button>
+  </div>
+
   <div class="attribution">
     Created by <a href="#">Reena</a>.
   </div>
 
   <script>
-    // JavaScript to handle character selection and dice rolling
+    // JavaScript code for character selection and dice rolling
     const characterSelection = document.querySelector('.character-selection');
     const characterInputs = characterSelection.querySelectorAll('input[type="radio"]');
     const selectedCharacterText = document.getElementById('selected-character');
@@ -201,11 +210,13 @@
     const dice2 = document.getElementById('dice2');
     const rollButton = document.getElementById('roll-button');
 
+    let selectedCharacter = '';
+
     // Character selection event listener
-    characterInputs.forEach((input) => {
+    characterInputs.forEach(input => {
       input.addEventListener('change', () => {
-        const selectedCharacter = characterSelection.querySelector('input[type="radio"]:checked');
-        selectedCharacterText.textContent = `You have chosen: ${selectedCharacter.value}`;
+        selectedCharacter = input.value;
+        selectedCharacterText.textContent = `Selected Character: ${selectedCharacter}`;
       });
     });
 
@@ -213,51 +224,53 @@
     rollButton.addEventListener('click', () => {
       const diceValue1 = Math.floor(Math.random() * 6) + 1;
       const diceValue2 = Math.floor(Math.random() * 6) + 1;
+
       dice1.textContent = diceValue1;
       dice2.textContent = diceValue2;
 
-      // Calculate the sum of the dice values
-      const diceSum = diceValue1 + diceValue2;
+      const totalDiceValue = diceValue1 + diceValue2;
 
-      // Determine the room based on the dice sum
-      let room = '';
-      switch (diceSum) {
+      switch (totalDiceValue) {
         case 2:
-          room = 'ballroom.html';
+          window.location.href = 'kitchen.html';
           break;
         case 3:
-          room = 'conservatory.html';
+          window.location.href = 'ballroom.html';
           break;
         case 4:
-          room = 'dining-room.html';
+          window.location.href = 'conservatory.html';
           break;
         case 5:
-          room = 'billiard-room.html';
+          window.location.href = 'dining-room.html';
           break;
         case 6:
-          room = 'library.html';
+          window.location.href = 'billiard-room.html';
           break;
         case 7:
-          room = 'study.html';
+          window.location.href = 'library.html';
           break;
         case 8:
-          room = 'hall.html';
+          window.location.href = 'study.html';
           break;
         case 9:
-          room = 'lounge.html';
+          window.location.href = 'hall.html';
           break;
         case 10:
-          room = 'cellar.html';
+          window.location.href = 'lounge.html';
           break;
         case 11:
-          room = 'kitchen.html';
+          window.location.href = 'cellar.html';
+          break;
+        default:
           break;
       }
+    });
 
-      // Redirect to the corresponding room
-      if (room) {
-        window.location.href = room;
-      }
+    // Audio control
+    const audio = document.querySelector('audio');
+    const startButton = document.getElementById('start-button');
+    startButton.addEventListener('click', () => {
+      audio.play();
     });
   </script>
 </body>
