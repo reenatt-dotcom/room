@@ -65,50 +65,6 @@
       object-fit: cover;
     }
 
-    .chosen-character {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .card-container {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    .card {
-      width: 150px;
-      height: 200px;
-      background-color: #ccc;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 20px;
-      color: #fff;
-      cursor: pointer;
-      perspective: 1000px;
-      transition: transform 0.3s;
-    }
-
-    .card:hover {
-      transform: rotateY(180deg);
-    }
-
-    .card-content {
-      transform-style: preserve-3d;
-      transition: transform 0.3s;
-    }
-
-    .card.facedown .card-content {
-      transform: rotateY(180deg);
-    }
-
-    .shuffle-button {
-      text-align: center;
-    }
-
     .attribution {
       font-size: 11px;
       text-align: center;
@@ -118,6 +74,70 @@
     .attribution a {
       color: hsl(228, 45%, 44%);
       text-decoration: none;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px;
+    }
+
+    .card {
+      width: 100px;
+      height: 150px;
+      background-color: #f5f5f5;
+      background-image: url('./images/card-back.jpg');
+      background-size: cover;
+      background-position: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 10px;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .dice-container {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .dice {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .dice-square {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      background-color: #fff;
+      border: 1px solid #000;
+      border-radius: 5px;
+      margin: 5px;
+      font-size: 24px;
+      line-height: 60px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .dice-button {
+      font-size: 18px;
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #selected-character {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -167,33 +187,20 @@
     </label>
   </div>
 
-  <div class="chosen-character">
-    <p>You have chosen: <span id="selected-character"></span></p>
-  </div>
-
   <div class="card-container">
-    <div class="card facedown" id="card1" onclick="flipCard(this)">
-      <div class="card-content">
-        <div class="card-front">?</div>
-        <div class="card-back">Suspect Card</div>
-      </div>
-    </div>
-    <div class="card facedown" id="card2" onclick="flipCard(this)">
-      <div class="card-content">
-        <div class="card-front">?</div>
-        <div class="card-back">Weapon Card</div>
-      </div>
-    </div>
-    <div class="card facedown" id="card3" onclick="flipCard(this)">
-      <div class="card-content">
-        <div class="card-front">?</div>
-        <div class="card-back">Room Card</div>
-      </div>
-    </div>
+    <div class="card" id="card1"></div>
+    <div class="card" id="card2"></div>
+    <div class="card" id="card3"></div>
   </div>
 
-  <div class="shuffle-button">
-    <button onclick="shuffleCards()">Shuffle</button>
+  <div id="selected-character"></div>
+
+  <div class="dice-container">
+    <div class="dice">
+      <div class="dice-square" id="dice1">1</div>
+      <div class="dice-square" id="dice2">1</div>
+    </div>
+    <button class="dice-button" id="roll-button">Roll Dice</button>
   </div>
 
   <div class="attribution">
@@ -201,52 +208,82 @@
   </div>
 
   <script>
-    // JavaScript to handle character selection and card shuffling
+    // JavaScript to handle character selection, card shuffling, and dice rolling
     const characterSelection = document.querySelector('.character-selection');
     const characterInputs = characterSelection.querySelectorAll('input[type="radio"]');
-    const selectedCharacterDisplay = document.getElementById('selected-character');
+    const cardContainer = document.querySelector('.card-container');
+    const cards = cardContainer.querySelectorAll('.card');
+    const selectedCharacterText = document.getElementById('selected-character');
+    const dice1 = document.getElementById('dice1');
+    const dice2 = document.getElementById('dice2');
+    const rollButton = document.getElementById('roll-button');
 
-    let selectedCharacter = '';
-    let solutionSuspect = '';
-    let solutionWeapon = '';
-    let solutionRoom = '';
-
-    // Event listener for character selection
-    characterInputs.forEach(input => {
+    // Character selection event listener
+    characterInputs.forEach((input) => {
       input.addEventListener('change', () => {
-        selectedCharacter = input.value;
-        selectedCharacterDisplay.textContent = selectedCharacter;
+        const selectedCharacter = characterSelection.querySelector('input[type="radio"]:checked');
+        selectedCharacterText.textContent = `You have chosen: ${selectedCharacter.value}`;
       });
     });
 
-    // Function to shuffle the cards
-    function shuffleCards() {
-      const cards = document.querySelectorAll('.card');
-      const suspects = ['Miss Scarlet', 'Colonel Mustard', 'Mrs. White', 'Mr. Green', 'Mrs. Peacock', 'Professor Plum'];
-      const weapons = ['Candlestick', 'Dagger', 'Lead Pipe', 'Revolver', 'Rope', 'Wrench'];
-      const rooms = ['Kitchen', 'Ballroom', 'Conservatory', 'Dining Room', 'Billiard Room', 'Library', 'Study', 'Hall', 'Lounge', 'Cellar'];
-
-      // Randomly select the solution cards
-      solutionSuspect = suspects[Math.floor(Math.random() * suspects.length)];
-      solutionWeapon = weapons[Math.floor(Math.random() * weapons.length)];
-      solutionRoom = rooms[Math.floor(Math.random() * rooms.length)];
-
-      // Hide the solution cards
-      cards.forEach(card => {
-        card.classList.add('facedown');
+    // Card shuffling event listener
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        card.style.backgroundImage = 'none';
+        card.style.backgroundColor = '#f5f5f5';
       });
+    });
 
-      // Assign numbers to the facedown cards
-      const facedownCards = document.querySelectorAll('.card.facedown');
-      facedownCards.forEach((card, index) => {
-        card.querySelector('.card-front').textContent = index + 1;
-      });
-    }
+    // Dice rolling event listener
+    rollButton.addEventListener('click', () => {
+      const diceValue1 = Math.floor(Math.random() * 6) + 1;
+      const diceValue2 = Math.floor(Math.random() * 6) + 1;
+      dice1.textContent = diceValue1;
+      dice2.textContent = diceValue2;
 
-    // Function to flip the card
-    function flipCard(card) {
-      card.classList.toggle('facedown');
-    }
+      // Calculate the sum of the dice values
+      const diceSum = diceValue1 + diceValue2;
+
+      // Determine the room based on the dice sum
+      let room = '';
+      switch (diceSum) {
+        case 2:
+          room = 'ballroom.html';
+          break;
+        case 3:
+          room = 'conservatory.html';
+          break;
+        case 4:
+          room = 'dining-room.html';
+          break;
+        case 5:
+          room = 'billiard-room.html';
+          break;
+        case 6:
+          room = 'library.html';
+          break;
+        case 7:
+          room = 'study.html';
+          break;
+        case 8:
+          room = 'hall.html';
+          break;
+        case 9:
+          room = 'lounge.html';
+          break;
+        case 10:
+          room = 'cellar.html';
+          break;
+        case 11:
+          room = 'kitchen.html';
+          break;
+      }
+
+      // Redirect to the corresponding room
+      if (room) {
+        window.location.href = room;
+      }
+    });
   </script>
 </body>
 </html>
