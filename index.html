@@ -129,14 +129,15 @@
     }
 
     .center {
-    text-align: center;
-    margin-top: 20px;
-  }
+      text-align: center;
+      margin-top: 20px;
+    }
     
   </style>
 </head>
 <body>
-  <audio src="whenyouwishuponastar.mp3" loop></audio>
+  <audio id="background-audio" src="whenyouwishuponastar.mp3" autoplay loop></audio>
+
 
   <nav>
     <ul>
@@ -209,68 +210,47 @@
     const dice1 = document.getElementById('dice1');
     const dice2 = document.getElementById('dice2');
     const rollButton = document.getElementById('roll-button');
+    const audio = document.getElementById('background-audio');
+    const startButton = document.getElementById('start-button');
 
-    let selectedCharacter = '';
+    // Function to handle character selection
+    function handleCharacterSelection() {
+      const selectedCharacter = characterSelection.querySelector('input[type="radio"]:checked');
+      if (selectedCharacter) {
+        selectedCharacterText.textContent = `Selected Character: ${selectedCharacter.value}`;
+      }
+    }
 
-    // Character selection event listener
-    characterInputs.forEach(input => {
-      input.addEventListener('change', () => {
-        selectedCharacter = input.value;
-        selectedCharacterText.textContent = `Selected Character: ${selectedCharacter}`;
-      });
-    });
-
-    // Dice rolling event listener
-    rollButton.addEventListener('click', () => {
+    // Function to roll the dice and navigate to the corresponding room
+    function rollDice() {
       const diceValue1 = Math.floor(Math.random() * 6) + 1;
       const diceValue2 = Math.floor(Math.random() * 6) + 1;
-
       dice1.textContent = diceValue1;
       dice2.textContent = diceValue2;
+      const totalValue = diceValue1 + diceValue2;
+      const currentRoom = window.location.pathname.split('/').pop().split('.')[0];
+      const rooms = ['kitchen', 'ballroom', 'conservatory', 'dining-room', 'billiard-room', 'library', 'study', 'hall', 'lounge', 'cellar'];
+      const currentIndex = rooms.indexOf(currentRoom);
+      const newIndex = (currentIndex + totalValue) % rooms.length;
+      const newRoom = rooms[newIndex];
+      window.location.href = `${newRoom}.html`;
+    }
 
-      const totalDiceValue = diceValue1 + diceValue2;
-
-      switch (totalDiceValue) {
-        case 2:
-          window.location.href = 'kitchen.html';
-          break;
-        case 3:
-          window.location.href = 'ballroom.html';
-          break;
-        case 4:
-          window.location.href = 'conservatory.html';
-          break;
-        case 5:
-          window.location.href = 'dining-room.html';
-          break;
-        case 6:
-          window.location.href = 'billiard-room.html';
-          break;
-        case 7:
-          window.location.href = 'library.html';
-          break;
-        case 8:
-          window.location.href = 'study.html';
-          break;
-        case 9:
-          window.location.href = 'hall.html';
-          break;
-        case 10:
-          window.location.href = 'lounge.html';
-          break;
-        case 11:
-          window.location.href = 'cellar.html';
-          break;
-        default:
-          break;
-      }
+    // Add event listeners
+    characterInputs.forEach((input) => {
+      input.addEventListener('change', handleCharacterSelection);
     });
 
-    // Audio control
-    const audio = document.querySelector('audio');
-    const startButton = document.getElementById('start-button');
+    rollButton.addEventListener('click', rollDice);
+
     startButton.addEventListener('click', () => {
-      audio.play();
+      if (audio.paused) {
+        audio.play();
+        startButton.textContent = 'Pause Audio';
+      } else {
+        audio.pause();
+        startButton.textContent = 'Start Audio';
+      }
     });
   </script>
 </body>
