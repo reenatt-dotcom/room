@@ -65,37 +65,47 @@
       object-fit: cover;
     }
 
-    .character-message {
+    .chosen-character {
       text-align: center;
       margin-bottom: 20px;
     }
 
-    .cards {
-      text-align: center;
-    }
-
     .card-container {
-      display: inline-block;
-      width: 80px;
-      height: 120px;
-      border: 1px solid #000;
-      background-color: #ccc;
-      margin: 10px;
-      position: relative;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
     }
 
-    .card-number {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 24px;
+    .card {
+      width: 150px;
+      height: 200px;
+      background-color: #ccc;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: bold;
+      font-size: 20px;
+      color: #fff;
+      cursor: pointer;
+      perspective: 1000px;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: rotateY(180deg);
+    }
+
+    .card-content {
+      transform-style: preserve-3d;
+      transition: transform 0.3s;
+    }
+
+    .card.facedown .card-content {
+      transform: rotateY(180deg);
     }
 
     .shuffle-button {
-      display: block;
-      margin: 0 auto;
       text-align: center;
     }
 
@@ -157,14 +167,33 @@
     </label>
   </div>
 
-  <div class="character-message"></div>
+  <div class="chosen-character">
+    <p>You have chosen: <span id="selected-character"></span></p>
+  </div>
 
-  <div class="cards">
-    <h2>Shuffled Cards</h2>
-    <div class="card-container"></div>
-    <div class="shuffle-button">
-      <button onclick="shuffleCards()">Shuffle</button>
+  <div class="card-container">
+    <div class="card facedown" id="card1" onclick="flipCard(this)">
+      <div class="card-content">
+        <div class="card-front">?</div>
+        <div class="card-back">Suspect Card</div>
+      </div>
     </div>
+    <div class="card facedown" id="card2" onclick="flipCard(this)">
+      <div class="card-content">
+        <div class="card-front">?</div>
+        <div class="card-back">Weapon Card</div>
+      </div>
+    </div>
+    <div class="card facedown" id="card3" onclick="flipCard(this)">
+      <div class="card-content">
+        <div class="card-front">?</div>
+        <div class="card-back">Room Card</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shuffle-button">
+    <button onclick="shuffleCards()">Shuffle</button>
   </div>
 
   <div class="attribution">
@@ -175,54 +204,48 @@
     // JavaScript to handle character selection and card shuffling
     const characterSelection = document.querySelector('.character-selection');
     const characterInputs = characterSelection.querySelectorAll('input[type="radio"]');
-    const characterMessage = document.querySelector('.character-message');
-    const cardContainer = document.querySelector('.card-container');
+    const selectedCharacterDisplay = document.getElementById('selected-character');
 
     let selectedCharacter = '';
+    let solutionSuspect = '';
+    let solutionWeapon = '';
+    let solutionRoom = '';
 
     // Event listener for character selection
     characterInputs.forEach(input => {
       input.addEventListener('change', () => {
         selectedCharacter = input.value;
-        characterMessage.textContent = `You have chosen: ${getCharacterFullName(selectedCharacter)}`;
+        selectedCharacterDisplay.textContent = selectedCharacter;
       });
     });
 
-    // Function to get character's full name
-    function getCharacterFullName(character) {
-      switch (character) {
-        case 'scarlet':
-          return 'Miss Scarlet';
-        case 'mustard':
-          return 'Colonel Mustard';
-        case 'white':
-          return 'Mrs. White';
-        case 'green':
-          return 'Mr. Green';
-        case 'peacock':
-          return 'Mrs. Peacock';
-        case 'plum':
-          return 'Professor Plum';
-        default:
-          return '';
-      }
+    // Function to shuffle the cards
+    function shuffleCards() {
+      const cards = document.querySelectorAll('.card');
+      const suspects = ['Miss Scarlet', 'Colonel Mustard', 'Mrs. White', 'Mr. Green', 'Mrs. Peacock', 'Professor Plum'];
+      const weapons = ['Candlestick', 'Dagger', 'Lead Pipe', 'Revolver', 'Rope', 'Wrench'];
+      const rooms = ['Kitchen', 'Ballroom', 'Conservatory', 'Dining Room', 'Billiard Room', 'Library', 'Study', 'Hall', 'Lounge', 'Cellar'];
+
+      // Randomly select the solution cards
+      solutionSuspect = suspects[Math.floor(Math.random() * suspects.length)];
+      solutionWeapon = weapons[Math.floor(Math.random() * weapons.length)];
+      solutionRoom = rooms[Math.floor(Math.random() * rooms.length)];
+
+      // Hide the solution cards
+      cards.forEach(card => {
+        card.classList.add('facedown');
+      });
+
+      // Assign numbers to the facedown cards
+      const facedownCards = document.querySelectorAll('.card.facedown');
+      facedownCards.forEach((card, index) => {
+        card.querySelector('.card-front').textContent = index + 1;
+      });
     }
 
-    // Function to shuffle cards
-    function shuffleCards() {
-      cardContainer.innerHTML = '';
-      const numbers = [1, 2, 3, 4, 5, 6];
-      numbers.sort(() => Math.random() - 0.5);
-      numbers.forEach(number => {
-        const card = document.createElement('div');
-        card.classList.add('card-container');
-        card.innerHTML = `
-          <div class="card-container">
-            <div class="card-number">${number}</div>
-          </div>
-        `;
-        cardContainer.appendChild(card);
-      });
+    // Function to flip the card
+    function flipCard(card) {
+      card.classList.toggle('facedown');
     }
   </script>
 </body>
