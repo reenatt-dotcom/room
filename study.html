@@ -104,9 +104,30 @@
       color: hsl(228, 45%, 44%);
       text-decoration: none;
     }
+
+    .cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100vh;
+    margin-top: -550px; /* Increase this value to make the cards higher */
+    margin-left: 150px;
+  }
+
+  .card {
+    
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 100px;
+    font-weight: bold;
+  }
+  #card2 {
+    margin-right: 200px; /* Increase this value to add more space between the second and third card */
+  }
   </style>
 </head>
 <body>
+  
   <audio src="https://www.televisiontunes.com/uploads/audio/Princess%20and%20the%20Frog%20-%20Friends%20On%20The%20Other%20Side.mp3" autoplay loop></audio>
   <nav>
     <ul>
@@ -137,8 +158,16 @@
     <button class="dice-button" id="roll-button">Roll Dice</button>
   </div>
 
+  
+
   <div class="attribution">
     Created by <a href="#">Reena</a>.
+  </div>
+
+  <div class="cards-container">
+    <div class="card" id="card1">Suspect</div>
+    <div class="card" id="card2">Weapon</div>
+    <div class="card" id="card3">Room</div>
   </div>
 
   <script>
