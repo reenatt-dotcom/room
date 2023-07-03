@@ -106,24 +106,35 @@
     }
 
     .cards-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    height: 100vh;
-    margin-top: -550px; /* Increase this value to make the cards higher */
-    margin-left: 150px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100vh;
+  margin-top: -600px; /* Increase this value to make the cards higher */
+  margin-left: 150px;
+}
 
-  .card {
-    
-    padding: 10px;
-    border-radius: 5px;
-    margin: 0 100px;
-    font-weight: bold;
-  }
-  #card2 {
-    margin-right: 200px; /* Increase this value to add more space between the second and third card */
-  }
+.card {
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0 100px;
+  font-weight: bold;
+}
+
+#card1 {
+  margin-left: 150px; /* Adjust this value as needed */
+}
+
+#card2 {
+  margin-right: 200px; /* Increase this value to add more space between the second and third card */
+}
+
+
+  .center {
+  text-align: center;
+  margin-top: 20px;
+}
+
   </style>
 </head>
 <body>
@@ -150,6 +161,11 @@
   <p>The study is equipped with a large wooden desk, a comfortable chair, and a majestic fireplace. It is the perfect place to engage in deep thinking, conduct research, or work on important projects. The room is adorned with antique maps, globes, and other artifacts that reflect the pursuit of knowledge.</p>
   <p>Many great minds have sought inspiration and solitude within the study's walls. It is a space that encourages deep thoughts, introspection, and the exploration of ideas. Whether you're a philosopher, a scientist, or an artist, the study offers a sanctuary for intellectual exploration and growth.</p>
 
+  <div class="center">
+    <button id="start-button">Start Audio</button>
+  </div>
+  
+  
   <div class="dice-container">
     <div class="dice">
       <div class="dice-square" id="dice1">1</div>
@@ -226,6 +242,21 @@
         window.location.href = room;
       }
     });
+
+    
+const audio = document.querySelector('audio'); // Select the audio element using its tag name
+const startButton = document.getElementById('start-button');
+
+startButton.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    startButton.textContent = 'Pause Audio';
+  } else {
+    audio.pause();
+    startButton.textContent = 'Start Audio';
+  }
+});
+
   </script>
 </body>
 </html>

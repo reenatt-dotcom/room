@@ -104,6 +104,12 @@
       color: hsl(228, 45%, 44%);
       text-decoration: none;
     }
+
+    .center {
+  text-align: center;
+  margin-top: 20px;
+}
+
   </style>
 </head>
 <body>
@@ -129,6 +135,11 @@
   <p>The library's cozy reading nooks and plush armchairs invite visitors to immerse themselves in captivating stories and explore new realms of knowledge. Soft lighting and the faint scent of aged paper create an ambiance of tranquility and inspiration.</p>
   <p>From historical tomes to contemporary works, the library's extensive collection covers a wide range of subjects. It has been a sanctuary for scholars, a source of inspiration for writers, and a refuge for those seeking solace in the written word.</p>
 
+  <div class="center">
+    <button id="start-button">Start Audio</button>
+  </div>
+  
+  
   <div class="dice-container">
     <div class="dice">
       <div class="dice-square" id="dice1">1</div>
@@ -197,6 +208,21 @@
         window.location.href = room;
       }
     });
+
+    
+const audio = document.querySelector('audio'); // Select the audio element using its tag name
+const startButton = document.getElementById('start-button');
+
+startButton.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    startButton.textContent = 'Pause Audio';
+  } else {
+    audio.pause();
+    startButton.textContent = 'Start Audio';
+  }
+});
+
   </script>
 </body>
 </html>

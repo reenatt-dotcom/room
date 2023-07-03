@@ -104,6 +104,12 @@
       color: hsl(228, 45%, 44%);
       text-decoration: none;
     }
+
+    .center {
+  text-align: center;
+  margin-top: 20px;
+}
+
   </style>
 </head>
 <body>
@@ -129,6 +135,11 @@
   <p>The walls of the hall are adorned with exquisite artwork and antique tapestries, showcasing the rich history of the mansion. Glowing chandeliers hang from the ceiling, casting a warm and inviting light throughout the space. The hall also features cozy seating areas where guests can gather and socialize.</p>
   <p>From the hall, you can access various parts of the mansion, each holding its own secrets and mysteries. Explore the different rooms and uncover the truth behind the enigmatic events that have unfolded within these walls.</p>
 
+  <div class="center">
+    <button id="start-button">Start Audio</button>
+  </div>
+  
+  
   <div class="dice-container">
     <div class="dice">
       <div class="dice-square" id="dice1">1</div>
@@ -197,6 +208,20 @@
         window.location.href = room;
       }
     });
+
+    const audio = document.querySelector('audio'); // Select the audio element using its tag name
+const startButton = document.getElementById('start-button');
+
+startButton.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    startButton.textContent = 'Pause Audio';
+  } else {
+    audio.pause();
+    startButton.textContent = 'Start Audio';
+  }
+});
+
   </script>
 </body>
 </html>

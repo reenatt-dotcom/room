@@ -105,6 +105,12 @@
       color: hsl(228, 45%, 44%);
       text-decoration: none;
     }
+
+    .center {
+  text-align: center;
+  margin-top: 20px;
+}
+
   </style>
 </head>
 <body>
@@ -129,6 +135,11 @@
   <p>The conservatory is a serene oasis where you can relax and immerse yourself in nature's beauty. The carefully curated collection of plants creates a vibrant and peaceful atmosphere. It's the perfect place for contemplation or engaging in lively conversations.</p>
   <p>Many social events have taken place in the conservatory, from elegant tea parties to intimate musical performances. The acoustics of the room lend themselves to the enchanting melodies of live musicians, adding an extra touch of magic to any gathering.</p>
 
+  <div class="center">
+    <button id="start-button">Start Audio</button>
+  </div>
+  
+  
   <div class="dice-container">
     <div class="dice">
       <div class="dice-square" id="dice1">1</div>
@@ -197,6 +208,20 @@
         window.location.href = room;
       }
     });
+
+    const audio = document.querySelector('audio'); // Select the audio element using its tag name
+const startButton = document.getElementById('start-button');
+
+startButton.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    startButton.textContent = 'Pause Audio';
+  } else {
+    audio.pause();
+    startButton.textContent = 'Start Audio';
+  }
+});
+
   </script>
 </body>
 </html>

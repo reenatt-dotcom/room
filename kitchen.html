@@ -104,6 +104,12 @@
       color: hsl(228, 45%, 44%);
       text-decoration: none;
     }
+
+    .center {
+  text-align: center;
+  margin-top: 20px;
+}
+
   </style>
 </head>
 <body>
@@ -128,6 +134,11 @@
   <p>The kitchen features state-of-the-art appliances, spacious countertops, and a large central island for food preparation. Shelves and cabinets are stocked with an impressive array of ingredients and cookware, ready for the next gastronomic adventure.</p>
   <p>From the sizzling sounds of pans on the stovetop to the rhythmic chopping of vegetables, the kitchen is alive with energy and creativity. It's a place where flavors blend, recipes come to life, and taste sensations are born.</p>
 
+  <div class="center">
+    <button id="start-button">Start Audio</button>
+  </div>
+  
+  
   <div class="dice-container">
     <div class="dice">
       <div class="dice-square" id="dice1">1</div>
@@ -196,6 +207,20 @@
         window.location.href = room;
       }
     });
+
+    const audio = document.querySelector('audio'); // Select the audio element using its tag name
+const startButton = document.getElementById('start-button');
+
+startButton.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    startButton.textContent = 'Pause Audio';
+  } else {
+    audio.pause();
+    startButton.textContent = 'Start Audio';
+  }
+});
+
   </script>
 </body>
 </html>

@@ -104,6 +104,13 @@
       color: hsl(228, 45%, 44%);
       text-decoration: none;
     }
+
+    
+.center {
+  text-align: center;
+  margin-top: 20px;
+}
+
   </style>
 </head>
 <body>
@@ -128,6 +135,11 @@
   <p>Welcome to the mysterious cellar! This dimly lit underground chamber holds the secrets of the mansion's past. As you descend the stairs, you can feel a chilling atmosphere and hear the faint echoes of whispers.</p>
   <p>The cellar is a labyrinth of stone walls and narrow passages. Dust-covered barrels and shelves of aging wine bottles create an eerie ambiance. The flickering candlelight casts eerie shadows, giving the cellar an air of intrigue and suspense.</p>
   <p>Legend has it that the cellar harbors hidden passages and secret compartments, leading to unknown parts of the mansion. Beware as you explore this ominous space, for the truth may lie hidden within its damp and shadowy corners.</p>
+
+  <div class="center">
+    <button id="start-button">Start Audio</button>
+  </div>
+  
 
   <div class="dice-container">
     <div class="dice">
@@ -197,6 +209,20 @@
         window.location.href = room;
       }
     });
+
+    const audio = document.querySelector('audio'); // Select the audio element using its tag name
+const startButton = document.getElementById('start-button');
+
+startButton.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    startButton.textContent = 'Pause Audio';
+  } else {
+    audio.pause();
+    startButton.textContent = 'Start Audio';
+  }
+});
+
   </script>
 </body>
 </html>

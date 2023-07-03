@@ -105,6 +105,12 @@
       color: hsl(228, 45%, 44%);
       text-decoration: none;
     }
+
+    .center {
+  text-align: center;
+  margin-top: 20px;
+}
+
   </style>
 </head>
 <body>
@@ -129,6 +135,11 @@
   <p>Welcome to the elegant ballroom! This grand space is adorned with sparkling chandeliers, polished marble floors, and intricate ceiling decorations. The air is filled with a sense of sophistication and excitement, as if it has witnessed countless enchanting dances and lavish gatherings.</p>
   <p>The ballroom's expansive size allows for graceful movements and enchanting waltzes. The walls are lined with tall mirrors, reflecting the beauty of the room from every angle. A magnificent stage is set at one end, often used for live performances or musical accompaniment to the dances.</p>
   <p>The atmosphere in the ballroom is always electric during social events and formal affairs. It has hosted glamorous masquerade balls, prestigious charity galas, and important celebrations throughout history. The ballroom's timeless charm and allure make it a favorite gathering place for socialites and distinguished guests.</p>
+
+  <div class="center">
+    <button id="start-button">Start Audio</button>
+  </div>
+  
 
   <div class="dice-container">
     <div class="dice">
@@ -198,6 +209,21 @@
         window.location.href = room;
       }
     });
+
+    const audio = document.querySelector('audio'); // Select the audio element using its tag name
+const startButton = document.getElementById('start-button');
+
+startButton.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    startButton.textContent = 'Pause Audio';
+  } else {
+    audio.pause();
+    startButton.textContent = 'Start Audio';
+  }
+});
+
+
   </script>
 </body>
 </html>

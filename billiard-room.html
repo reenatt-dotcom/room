@@ -105,6 +105,12 @@
       color: hsl(228, 45%, 44%);
       text-decoration: none;
     }
+
+    .center {
+  text-align: center;
+  margin-top: 20px;
+}
+
   </style>
 </head>
 <body>
@@ -130,6 +136,11 @@
   <p>The billiard table, covered in vibrant green cloth, is the centerpiece of the room. Its smooth surface and perfectly balanced cues invite players to engage in strategic games. The walls are adorned with classic paintings and vintage photographs, adding a touch of nostalgia to the atmosphere.</p>
   <p>Throughout history, the billiard room has been a place where friends gather, important decisions are made, and secrets are shared. Its hushed conversations and the satisfying sound of balls colliding create an ambiance of intrigue and camaraderie. It is a room where players engage in mental battles and build alliances, all while enjoying the refined surroundings.</p>
 
+  <div class="center">
+    <button id="start-button">Start Audio</button>
+  </div>
+  
+  
   <div class="dice-container">
     <div class="dice">
       <div class="dice-square" id="dice1">1</div>
@@ -198,6 +209,20 @@
         window.location.href = room;
       }
     });
+
+    const audio = document.querySelector('audio'); // Select the audio element using its tag name
+const startButton = document.getElementById('start-button');
+
+startButton.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    startButton.textContent = 'Pause Audio';
+  } else {
+    audio.pause();
+    startButton.textContent = 'Start Audio';
+  }
+});
+
   </script>
 </body>
 </html>
