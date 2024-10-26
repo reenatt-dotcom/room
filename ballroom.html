@@ -9,106 +9,142 @@
   <style>
     /* CSS styles for the page */
     html, body {
-        height: 100%;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+  height: 100%;
+}
 
-      background-image: url('./images/ballroom.gif');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      font-family: Arial, sans-serif;
-      font-weight: 600;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow effect */
-      color: white;
-      
-    }
-    
-    nav {
-      background-color: #333;
-    }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url('./images/ballroom.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: white;
+}
 
-    ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-    }
+nav {
+  background-color: #333;
+}
 
-    li {
-      margin: 0 10px;
-    }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
 
-    li a {
-      color: #fff;
-      text-decoration: none;
-      padding: 10px;
-      transition: background-color 0.3s;
-    }
+li {
+  margin: 0 10px;
+}
 
-    li a:hover {
-      background-color: #555;
-    }
+li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  transition: background-color 0.3s;
+}
 
-    h1, p {
-      text-align: center;
-      margin: 20px;
-    }
+li a:hover {
+  background-color: #555;
+}
 
-    .dice-container {
-      text-align: center;
-      margin-top: 50px;
-    }
+h1, p {
+  text-align: center;
+  margin: 20px;
+}
 
-    .dice {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 10px;
-    }
+.dice-container {
+  text-align: center;
+  margin-top: 50px;
+}
 
-    .dice-square {
-      display: inline-block;
-      width: 60px;
-      height: 60px;
-      background-color: #fff;
-      border: 1px solid #000;
-      border-radius: 5px;
-      margin: 5px;
-      font-size: 24px;
-      line-height: 60px;
-      text-align: center;
-      cursor: pointer;
-    }
+.dice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
-    .dice-button {
-      font-size: 18px;
-      padding: 10px 20px;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+.dice-square {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin: 5px;
+  font-size: 24px;
+  line-height: 60px;
+  text-align: center;
+  cursor: pointer;
+}
 
-    .attribution {
-      font-size: 11px;
-      text-align: center;
-      margin-top: 50px;
-    }
+.dice-button {
+  font-size: 18px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-    .attribution a {
-      color: hsl(228, 45%, 44%);
-      text-decoration: none;
-    }
+.attribution {
+  font-size: 11px;
+  text-align: center;
+  margin-top: 50px;
+}
 
-    .center {
+.attribution a {
+  color: hsl(228, 45%, 44%);
+  text-decoration: none;
+}
+
+.center {
   text-align: center;
   margin-top: 20px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  h1, p {
+    margin: 10px; /* Reduce margin for smaller screens */
+  }
+
+  .dice-container {
+    margin-top: 30px; /* Reduce margin */
+  }
+
+  .dice-square {
+    width: 50px; /* Smaller dice squares */
+    height: 50px;
+    font-size: 20px; /* Adjust font size for smaller screens */
+  }
+
+  .dice-button {
+    padding: 8px 16px; /* Smaller button */
+  }
+
+  .attribution {
+    margin-top: 30px; /* Reduce margin */
+  }
+}
+
+@media (max-width: 480px) {
+  .dice-square {
+    width: 40px; /* Even smaller dice squares */
+    height: 40px;
+    font-size: 18px; /* Smaller font size */
+  }
+
+  .dice-button {
+    padding: 6px 12px; /* Smaller button padding */
+  }
 }
 
   </style>

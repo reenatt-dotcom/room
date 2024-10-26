@@ -8,130 +8,179 @@
   <style>
     /* CSS styles for the homepage */
     body, html {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    
-    body {
-      font-family: Arial, sans-serif;
-      background-image: url('./images/castle.gif');
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      background-position: center;
-      color: white;
-      font-weight: 600;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow effect */
-    }
-    
-    nav {
-      background-color: #333;
-    }
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-    ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-    }
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('./images/castle.gif');
+  background-repeat: no-repeat;
+  background-size: cover; /* Use cover to ensure the background image covers the whole area */
+  background-position: center;
+  color: white;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
 
-    li {
-      margin: 0 10px;
-    }
+nav {
+  background-color: #333;
+}
 
-    li a {
-      color: #fff;
-      text-decoration: none;
-      padding: 10px;
-      transition: background-color 0.3s;
-    }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
 
-    li a:hover {
-      background-color: #555;
-    }
+li {
+  margin: 0 10px;
+}
 
-    h1, p {
-      text-align: center;
-      margin: 20px;
-    }
+li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  transition: background-color 0.3s;
+}
 
-    .character-selection {
-      text-align: center;
-      margin: 50px;
-    }
+li a:hover {
+  background-color: #555;
+}
 
-    .character-selection label {
-      display: inline-block;
-      margin: 10px;
-      cursor: pointer;
-    }
+h1, p {
+  text-align: center;
+  margin: 20px;
+}
 
-    .character-image {
-      display: block;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: contain;
-    }
+.character-selection {
+  text-align: center;
+  margin: 50px 0; /* Vertical margin for spacing */
+}
 
-    .attribution {
-      font-size: 11px;
-      text-align: center;
-      margin-top: 50px;
-    }
+.character-selection label {
+  display: inline-block;
+  margin: 10px;
+  cursor: pointer;
+}
 
-    .attribution a {
-      color: hsl(228, 45%, 44%);
-      text-decoration: none;
-    }
+.character-image {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: contain;
+}
 
-    .dice-container {
-      text-align: center;
-      margin-top: 50px;
-    }
+.attribution {
+  font-size: 11px;
+  text-align: center;
+  margin-top: 50px;
+}
 
-    .dice {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 10px;
-    }
+.attribution a {
+  color: hsl(228, 45%, 44%);
+  text-decoration: none;
+}
 
-    .dice-square {
-      display: inline-block;
-      width: 60px;
-      height: 60px;
-      background-color: #fff;
-      border: 1px solid #000;
-      border-radius: 5px;
-      margin: 5px;
-      font-size: 24px;
-      line-height: 60px;
-      text-align: center;
-      cursor: pointer;
-    }
+.dice-container {
+  text-align: center;
+  margin-top: 50px;
+}
 
-    .dice-button {
-      font-size: 18px;
-      padding: 10px 20px;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+.dice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
-    #selected-character {
-      text-align: center;
-      margin-top: 20px;
-      font-weight: bold;
-    }
+.dice-square {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin: 5px;
+  font-size: 24px;
+  line-height: 60px;
+  text-align: center;
+  cursor: pointer;
+}
 
-    .center {
-      text-align: center;
-      margin-top: 20px;
-    }
+.dice-button {
+  font-size: 18px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#selected-character {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.center {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  h1, p {
+    margin: 10px; /* Reduce margin on smaller screens */
+  }
+
+  .character-selection {
+    margin: 30px 0; /* Reduce margin for smaller screens */
+  }
+
+  .character-image {
+    width: 80px; /* Smaller character image */
+    height: 80px;
+  }
+
+  .dice-square {
+    width: 50px; /* Smaller dice squares */
+    height: 50px;
+    font-size: 20px; /* Adjust font size for smaller screens */
+  }
+
+  .dice-button {
+    padding: 8px 16px; /* Smaller button */
+  }
+
+  .attribution {
+    margin-top: 30px; /* Reduce margin */
+  }
+}
+
+@media (max-width: 480px) {
+  .character-image {
+    width: 60px; /* Even smaller character image */
+    height: 60px;
+  }
+
+  .dice-square {
+    width: 40px; /* Even smaller dice squares */
+    height: 40px;
+    font-size: 18px; /* Smaller font size */
+  }
+
+  .dice-button {
+    padding: 6px 12px; /* Smaller button padding */
+  }
+}
+
     
   </style>
 </head>
