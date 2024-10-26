@@ -7,8 +7,9 @@
   <title>Online Clue Game</title>
   <style>
     /* CSS styles for the homepage */
-    body, html {
+    html, body {
   height: 100%;
+  min-height: 100vh; /* Ensures full viewport height */
   margin: 0;
   padding: 0;
 }
@@ -17,12 +18,15 @@ body {
   font-family: Arial, sans-serif;
   background-image: url('./images/castle.gif');
   background-repeat: no-repeat;
-  background-size: cover; /* Use cover to ensure the background image covers the whole area */
+  background-size: cover;
   background-position: center;
   color: white;
   font-weight: 600;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+
+/* Rest of your CSS remains unchanged */
+
 
 nav {
   background-color: #333;
