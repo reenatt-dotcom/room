@@ -8,193 +8,190 @@
   <style>
     /* CSS styles for the homepage */
     html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+        height: 100%;
+        width: 100%; /* Ensure full width */
+        margin: 0;
+        padding: 0;
+    }
 
-body {
-  height: 100vh;
-  font-family: Arial, sans-serif;
-  background-image: url('./images/castle.gif');
-  background-repeat: no-repeat;
-  background-size: cover; /* Ensures the background image covers the whole area */
-  background-position: center;
-  color: white;
-  font-weight: 600;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
+    body {
+        height: 100vh; /* Full viewport height */
+        width: 100vw; /* Full viewport width */
+        font-family: Arial, sans-serif;
+        background-image: url('./images/castle.gif'); /* Your background image */
+        background-repeat: no-repeat;
+        background-size: 100% 100%; /* Stretch the image to cover the entire area */
+        background-position: center;
+        color: white;
+        font-weight: 600;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        overflow: hidden; /* Prevent scrollbars if content is taller */
+    }
+
+    .content {
+        flex: 1; /* Fills the available space */
+    }
+
+    nav {
+        background-color: #333;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    }
+
+    li {
+        margin: 0 10px;
+    }
+
+    li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px;
+        transition: background-color 0.3s;
+    }
+
+    li a:hover {
+        background-color: #555;
+    }
+
+    h1, p {
+        text-align: center;
+        margin: 20px;
+    }
+
+    .character-selection {
+        text-align: center;
+        margin: 50px 0; /* Vertical margin for spacing */
+    }
+
+    .character-selection label {
+        display: inline-block;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    .character-image {
+        display: block;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: contain;
+    }
+
+    .attribution {
+        font-size: 11px;
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .attribution a {
+        color: hsl(228, 45%, 44%);
+        text-decoration: none;
+    }
+
+    .dice-container {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .dice {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .dice-square {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        background-color: #fff;
+        border: 1px solid #000;
+        border-radius: 5px;
+        margin: 5px;
+        font-size: 24px;
+        line-height: 60px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .dice-button {
+        font-size: 18px;
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #selected-character {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    .center {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+        h1, p {
+            margin: 10px; /* Reduce margin on smaller screens */
+        }
+
+        .character-selection {
+            margin: 30px 0; /* Reduce margin for smaller screens */
+        }
+
+        .character-image {
+            width: 80px; /* Smaller character image */
+            height: 80px;
+        }
+
+        .dice-square {
+            width: 50px; /* Smaller dice squares */
+            height: 50px;
+            font-size: 20px; /* Adjust font size for smaller screens */
+        }
+
+        .dice-button {
+            padding: 8px 16px; /* Smaller button */
+        }
+
+        .attribution {
+            margin-top: 30px; /* Reduce margin */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .character-image {
+            width: 60px; /* Even smaller character image */
+            height: 60px;
+        }
+
+        .dice-square {
+            width: 40px; /* Even smaller dice squares */
+            height: 40px;
+            font-size: 18px; /* Smaller font size */
+        }
+
+        .dice-button {
+            padding: 6px 12px; /* Smaller button padding */
+        }
+    }
+</style>
 
 
-.content {
-  flex: 1; /* Fills the available space */
-}
 
-/* Other styles remain unchanged */
-
-
-/* Rest of your CSS remains unchanged */
-
-
-nav {
-  background-color: #333;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
-}
-
-li {
-  margin: 0 10px;
-}
-
-li a {
-  color: #fff;
-  text-decoration: none;
-  padding: 10px;
-  transition: background-color 0.3s;
-}
-
-li a:hover {
-  background-color: #555;
-}
-
-h1, p {
-  text-align: center;
-  margin: 20px;
-}
-
-.character-selection {
-  text-align: center;
-  margin: 50px 0; /* Vertical margin for spacing */
-}
-
-.character-selection label {
-  display: inline-block;
-  margin: 10px;
-  cursor: pointer;
-}
-
-.character-image {
-  display: block;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: contain;
-}
-
-.attribution {
-  font-size: 11px;
-  text-align: center;
-  margin-top: 50px;
-}
-
-.attribution a {
-  color: hsl(228, 45%, 44%);
-  text-decoration: none;
-}
-
-.dice-container {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.dice {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.dice-square {
-  display: inline-block;
-  width: 60px;
-  height: 60px;
-  background-color: #fff;
-  border: 1px solid #000;
-  border-radius: 5px;
-  margin: 5px;
-  font-size: 24px;
-  line-height: 60px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.dice-button {
-  font-size: 18px;
-  padding: 10px 20px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#selected-character {
-  text-align: center;
-  margin-top: 20px;
-  font-weight: bold;
-}
-
-.center {
-  text-align: center;
-  margin-top: 20px;
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  h1, p {
-    margin: 10px; /* Reduce margin on smaller screens */
-  }
-
-  .character-selection {
-    margin: 30px 0; /* Reduce margin for smaller screens */
-  }
-
-  .character-image {
-    width: 80px; /* Smaller character image */
-    height: 80px;
-  }
-
-  .dice-square {
-    width: 50px; /* Smaller dice squares */
-    height: 50px;
-    font-size: 20px; /* Adjust font size for smaller screens */
-  }
-
-  .dice-button {
-    padding: 8px 16px; /* Smaller button */
-  }
-
-  .attribution {
-    margin-top: 30px; /* Reduce margin */
-  }
-}
-
-@media (max-width: 480px) {
-  .character-image {
-    width: 60px; /* Even smaller character image */
-    height: 60px;
-  }
-
-  .dice-square {
-    width: 40px; /* Even smaller dice squares */
-    height: 40px;
-    font-size: 18px; /* Smaller font size */
-  }
-
-  .dice-button {
-    padding: 6px 12px; /* Smaller button padding */
-  }
-}
-
-    
-  </style>
 </head>
 <body>
   <audio id="background-audio" src="whenyouwishuponastar.mp3" autoplay loop></audio>
