@@ -12,6 +12,8 @@
         width: 100%; /* Ensure full width */
         margin: 0;
         padding: 0;
+        display: flex; /* Use flexbox for layout */
+        flex-direction: column; /* Arrange elements in a column */
     }
 
     body {
@@ -20,20 +22,22 @@
         font-family: Arial, sans-serif;
         background-image: url('./images/castle.gif'); /* Your background image */
         background-repeat: no-repeat;
-        background-size: 100% 100%; /* Stretch the image to cover the entire area */
+        background-size: cover; /* Cover the area without stretching */
         background-position: center;
         color: white;
         font-weight: 600;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         overflow: hidden; /* Prevent scrollbars if content is taller */
-    }
-
-    .content {
-        flex: 1; /* Fills the available space */
+        padding-top: 60px; /* Make room for the fixed nav */
     }
 
     nav {
+        position: fixed; /* Keep the navigation fixed at the top */
+        top: 0;
+        left: 0;
+        right: 0;
         background-color: #333;
+        z-index: 10; /* Ensure it’s above other content */
     }
 
     ul {
@@ -58,6 +62,15 @@
 
     li a:hover {
         background-color: #555;
+    }
+
+    .content {
+        flex: 1; /* Allow content to grow and fill available space */
+        display: flex; /* Allow children to be flex items */
+        flex-direction: column; /* Arrange items in a column */
+        align-items: center; /* Center items */
+        z-index: 1; /* Set z-index to be above the background */
+        margin-top: 60px; /* Space for fixed nav */
     }
 
     h1, p {
@@ -97,7 +110,9 @@
 
     .dice-container {
         text-align: center;
-        margin-top: 50px;
+        margin-top: 20px; /* Adjust margin for better spacing */
+        position: relative; /* Allows for z-index to take effect */
+        z-index: 2; /* Make sure dice are above the background */
     }
 
     .dice {
@@ -188,14 +203,10 @@
             padding: 6px 12px; /* Smaller button padding */
         }
     }
-</style>
-
-
-
+  </style>
 </head>
 <body>
   <audio id="background-audio" src="whenyouwishuponastar.mp3" autoplay loop></audio>
-
 
   <nav>
     <ul>
@@ -212,54 +223,51 @@
     </ul>
   </nav>
 
-  <h1>Welcome to the Online Clue Game</h1>
-  <p>Choose a character:</p>
+  <div class="content">
+    <h1>Welcome to the Online Clue Game</h1>
+    <p>Choose a character:</p>
 
-  <div class="character-selection">
-    <label>
-      <input type="radio" name="character" value="cinderella">
-      <img src="./images/cinderella.png" alt="Cinderella" class="character-image">
-    </label>
-    <label>
-      <input type="radio" name="character" value="belle">
-      <img src="./images/belle.png" alt="Belle" class="character-image">
-    </label>
-    <label>
-      <input type="radio" name="character" value="ariel">
-      <img src="./images/ariel.png" alt="Ariel" class="character-image">
-    </label>
-    <label>
-      <input type="radio" name="character" value="jasmine">
-      <img src="./images/jasmine.png" alt="Jasmine" class="character-image">
-    </label>
-    <label>
-      <input type="radio" name="character" value="rapunzel">
-      <img src="./images/rapunzel.png" alt="Rapunzel" class="character-image">
-    </label>
-    <label>
-      <input type="radio" name="character" value="aladdin">
-      <img src="./images/aladdin.png" alt="Aladdin" class="character-image">
-    </label>
-  </div>
-
-  <div id="selected-character"></div>
-
-  <div class="center">
-    <button id="start-button">Start Audio</button>
-  </div>
-
-
-  <div class="dice-container">
-    <div class="dice">
-      <div class="dice-square" id="dice1">1</div>
-      <div class="dice-square" id="dice2">1</div>
+    <div class="character-selection">
+      <label>
+        <input type="radio" name="character" value="cinderella">
+        <img src="./images/cinderella.png" alt="Cinderella" class="character-image">
+      </label>
+      <label>
+        <input type="radio" name="character" value="belle">
+        <img src="./images/belle.png" alt="Belle" class="character-image">
+      </label>
+      <label>
+        <input type="radio" name="character" value="ariel">
+        <img src="./images/ariel.png" alt="Ariel" class="character-image">
+      </label>
+      <label>
+        <input type="radio" name="character" value="jasmine">
+        <img src="./images/jasmine.png" alt="Jasmine" class="character-image">
+      </label>
+      <label>
+        <input type="radio" name="character" value="rapunzel">
+        <img src="./images/rapunzel.png" alt="Rapunzel" class="character-image">
+      </label>
+      <label>
+        <input type="radio" name="character" value="aladdin">
+        <img src="./images/aladdin.png" alt="Aladdin" class="character-image">
+      </label>
     </div>
-    <button class="dice-button" id="roll-button">Roll Dice</button>
+
+    <div id="selected-character"></div>
+
+    <div class="center">
+      <button id="start-button">Start Audio</button>
+    </div>
+
+    <div class="dice-container">
+      <div class="dice">
+        <div class="dice-square" id="dice1">1</div>
+        <div class="dice-square" id="dice2">1</div>
+      </div>
+      <button class="dice-button" id="roll-button">Roll Dice</button>
+    </div>
   </div>
-
-  
-
-  
 
   <script>
     // JavaScript code for character selection and dice rolling
